@@ -12,6 +12,7 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 | App           | OS             | Platforms      | Notes          |
 |-------------- | -------------- | -------------- | -------------- |
 | Kitty         | MacOS          | x86-64         |                |
+| Kitty         | Linux          | x86-64         | Arch           |
 
 
 ## Planned Configurations
