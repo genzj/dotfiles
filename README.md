@@ -21,6 +21,12 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 | Zsh           | MacOS/Linux    | zshrc, omz, p10k, 3rd plugins | take from MacOS |
 | Bat           | MacOS/Linux    | themes (twodark-genzj), config | take from MacOS |
 | Git           |                | global git-config        |                |
-| czg           |                | .czrz                    | OpenAI token needs encryption |
+| czg           |                | .config/.czrc            | OpenAI token needs encryption |
 | neovide       |                | config                   |                |
 | ptpython      |                | config                   | TBD            |
+
+External repos:
+
+* [Oh-my-fish config](https://github.com/genzj/my-omf-config)
+* [NeoVIM config](https://github.com/genzj/mynvim)
+* [Tmux config](https://github.com/genzj/tmux-myconf)
