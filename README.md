@@ -1,0 +1,26 @@
+# dotfiles
+
+This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
+
+## Apply
+
+1. [Install chezmoi](https://www.chezmoi.io/install/)
+1. Apply the dotfiles by running `chezmoi init --apply genzj` [ref](https://www.chezmoi.io/reference/commands/init/)
+
+## Managed Configurations
+
+| App           | OS             | Platforms      | Notes          |
+|-------------- | -------------- | -------------- | -------------- |
+| Kitty         | MacOS          | x86-64         |                |
+
+
+## Planned Configurations
+
+| App group     | OS             | Items                    | Notes          |
+|-------------- | -------------- | ------------------------ | -------------- |
+| Zsh           | MacOS/Linux    | zshrc, omz, p10k, 3rd plugins | take from MacOS |
+| Bat           | MacOS/Linux    | themes (twodark-genzj), config | take from MacOS |
+| Git           |                | global git-config        |                |
+| czg           |                | .czrz                    | OpenAI token needs encryption |
+| neovide       |                | config                   |                |
+| ptpython      |                | config                   | TBD            |
