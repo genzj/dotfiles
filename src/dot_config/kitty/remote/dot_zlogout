@@ -1,0 +1,10 @@
+if [[ $TERM == xterm-kitty ]] ; then
+    # set kitty theme
+    if [[ -r ~/.local/share/kitty-ssh-kitten/kitty/bin/kitten ]] ; then
+        ~/.local/share/kitty-ssh-kitten/kitty/bin/kitten @ set-tab-color active_bg=none inactive_bg=none
+        ~/.local/share/kitty-ssh-kitten/kitty/bin/kitten @ set-window-logo none
+    fi
+fi
+
+
+[[ -r ~/.zlogout ]] && source ~/.zlogout
