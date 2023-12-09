@@ -1,3 +1,66 @@
+# vim: ft=gitconfig
+[alias]
+	br = branch
+	ci = commit
+	co = checkout
+	dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+	diffcache = diff --cached
+	ffmerge = merge --ff-only
+	ffpull = pull --ff-only
+	ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi"
+	logdiff = log -p
+	loglast = log -1
+	st = status
+	whatadded = log --diff-filter=A
+[color]
+	ui = auto
+[core]
+	autocrlf = input
+	eol = lf
+	excludesfile = $HOME/.gitignore-global
+	pager = less -FMRiX
+[credential]
+{{- if eq .chezmoi.os "darwin" }}
+	helper = osxkeychain
+{{- else }}
+	helper = store
+{{- end }}
+{{- if eq .chezmoi.os "linux" }}
+[credential "https://github.com"]
+  ; helper = github -b 'cache --timeout=86400'
+  helper = github -b 'store'
+{{- end }}
+[diff]
+	tool = bc3
+[difftool]
+	bc3 = trustExitCode
+{{- if eq .chezmoi.os "linux" }}
+[difftool "bc3"]
+	path = /usr/bin/bcompare
+{{- end }}
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[http]
+{{- if .proxy.enabled  }}
+    proxy = {{ .proxy.http_proxy }}
+{{- end }}
+[init]
+	defaultBranch = main
+[merge]
+	tool = bc3
+[mergetool]
+	bc3 = trustExitCode
+{{- if eq .chezmoi.os "linux" }}
+[mergetool "bc3"]
+	path = /usr/bin/bcompare
+{{- end }}
+[pull]
+	ff = only
+[push]
+	default = simple
 [user]
 {{- if eq .chezmoi.username "zhuje" }}
 	email = zhuje@amazon.com
@@ -6,35 +69,3 @@
 	email = zj0512@gmail.com
 	name = genzj
 {{ end -}}
-[color]
-	ui = auto
-[core]
-	pager = less -FMRiX
-	excludesfile = $HOME/.gitignore-global
-[push]
-	default = simple
-[alias]
-	dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
-	st = status
-	br = branch
-	ci = commit
-	co = checkout
-	diffcache = diff --cached
-	loglast = log -1
-	logdiff = log -p
-	ffmerge = merge --ff-only
-	ffpull = pull --ff-only
-	ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi"
-	whatadded = log --diff-filter=A
-[pull]
-	ff = only
-[credential]
-{{- if eq .chezmoi.os "darwin" }}
-	helper = osxkeychain
-{{ end -}}
-[diff]
-	tool = bc3
-[merge]
-	tool = bc3
-[init]
-	defaultBranch = main
