@@ -1,7 +1,13 @@
+encryption = "age"
+
+[age]
+identity = "{{ .chezmoi.homeDir }}/.age-key.txt"
+recipient = "age1z6jxknjgj22tln9z7fpevml6sv6rgcfmtym9kqvgepf5z4gkfsvqqk9pva"
+
 [data.font]
-{{ if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" }}
 monospace = "MonaspiceNe Nerd Font Mono Regular"
-{{ else }}
+{{- else }}
 # Github Monaspace Font Families:
 #   By default they are not supported in kitty due to lacking of the spacing prop.
 #   Hack by adding ~/.config/fontconfig/fonts.conf with following content:
@@ -22,7 +28,7 @@ monospace = "MonaspiceNe Nerd Font Mono Regular"
 #   Ref: https://github.com/kovidgoyal/kitty/issues/97#issuecomment-579094656
 #
 monospace = "Monaspace Neon Regular"
-{{ end }}
+{{- end }}
 
 size = 12
 
@@ -32,8 +38,8 @@ http_proxy = "127.0.0.1:8123"
 socks5_proxy = "127.0.0.1:1080"
 
 [data.attribute]
-{{ if (and (eq .chezmoi.username "zhuje") (ne .chezmoi.os "darwin" )) }}
+{{- if (and (eq .chezmoi.username "zhuje") (ne .chezmoi.os "darwin" )) }}
 is_cloud_desktop = true
-{{ else }}
+{{- else }}
 is_cloud_desktop = false
-{{ end }}
+{{- end }}

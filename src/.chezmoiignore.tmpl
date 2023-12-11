@@ -1,4 +1,8 @@
 {{- if .attribute.is_cloud_desktop }}
 # cloud desktops don't install kitty
 .config/kitty/
+
+# don't want to install chatGPT token on cloud desktops
+# but didn't find a way to separate it from the config file
+.config/.czrc
 {{- end }}
