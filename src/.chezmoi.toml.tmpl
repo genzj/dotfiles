@@ -30,3 +30,10 @@ size = 12
 enabled = false
 http_proxy = "127.0.0.1:8123"
 socks5_proxy = "127.0.0.1:1080"
+
+[data.attribute]
+{{ if (and (eq .chezmoi.username "zhuje") (ne .chezmoi.os "darwin" )) }}
+is_cloud_desktop = true
+{{ else }}
+is_cloud_desktop = false
+{{ end }}
