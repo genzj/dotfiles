@@ -14,6 +14,7 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 | Kitty         | MacOS          | x86-64         |                |
 | Kitty         | Linux          | x86-64         | Arch           |
 | Git           | MacOS/Linux    | All            | use data `proxy` to swith on/off git http proxy setting |
+| Bat           | MacOS/Linux    | All            | contrast-enhanced theme (twodark-genzj), config |
 
 
 ## Planned Configurations
@@ -21,7 +22,6 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 | App group     | OS             | Items                    | Notes          |
 |-------------- | -------------- | ------------------------ | -------------- |
 | Zsh           | MacOS/Linux    | zshrc, omz, p10k, 3rd plugins | take from MacOS |
-| Bat           | MacOS/Linux    | themes (twodark-genzj), config | take from MacOS |
 | czg           |                | .config/.czrc            | OpenAI token needs encryption |
 | neovide       |                | config                   |                |
 | ptpython      |                | config                   | TBD            |
