@@ -29,10 +29,22 @@ External repos:
 | App group     | OS             | Items                    | Notes          |
 |-------------- | -------------- | ------------------------ | -------------- |
 | Zsh           | MacOS/Linux    | zshrc, omz, p10k, 3rd plugins | take from MacOS |
-| neovide       |                | config                   |                |
 | ptpython      |                | config                   | TBD            |
 
 External repos:
 
 * [Oh-my-fish config](https://github.com/genzj/my-omf-config)
-* [NeoVIM config](https://github.com/genzj/mynvim)
+
+## Out of Scope (for now)
+
+### NeoVIM and Neovide config
+
+My [NeoVIM config](https://github.com/genzj/mynvim) contains the lazy lock file
+which varies with different OS/host because not all plugins are enabled
+everywhere. So chezmoi external system which is based on git-pull cannot always
+successfully update the config folder which contains modified lazy-lock file.
+
+Most of the Neovide customizations are also included in the mynvim repo as lua
+scripts. Neovide [config file](https://neovide.dev/config-file.html) is for a
+different set of configurations which I don't need to alter because their
+default values works well for me. So it's not managed by this repo either.
