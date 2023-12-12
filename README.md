@@ -16,7 +16,13 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 | Git           | MacOS/Linux    | All            | Use data `proxy` to swith on/off git http proxy setting |
 | Bat           | MacOS/Linux    | All            | Contrast-enhanced theme (twodark-genzj), config |
 | czg           | MacOS/Linux    | All            | Needs age key. Excl. CloudDesktop |
+| tmux          | MacOS/Linux    | All            | Work with my tmux config and tpm (see External repos below) |
 
+
+External repos:
+
+* [Tmux config](https://github.com/genzj/tmux-myconf)
+* [Tmux plugin manager](https://github.com/tmux-plugins/tpm)
 
 ## Planned Configurations
 
@@ -30,4 +36,3 @@ External repos:
 
 * [Oh-my-fish config](https://github.com/genzj/my-omf-config)
 * [NeoVIM config](https://github.com/genzj/mynvim)
-* [Tmux config](https://github.com/genzj/tmux-myconf)

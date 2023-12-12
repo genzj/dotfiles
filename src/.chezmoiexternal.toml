@@ -1,0 +1,11 @@
+[".tmux-myconf"]
+    type = "git-repo"
+    url = "https://github.com/genzj/tmux-myconf.git"
+    refreshPeriod = "24h"
+    [".tmux-myconf".pull]
+        args = ["--ff-only"]
+
+[".tmux/plugins/tpm"]
+    type = "git-repo"
+    url = "https://github.com/tmux-plugins/tpm.git"
+    refreshPeriod = "168h"
