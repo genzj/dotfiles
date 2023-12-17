@@ -43,3 +43,9 @@ is_cloud_desktop = true
 {{- else }}
 is_cloud_desktop = false
 {{- end }}
+
+{{- if (.chezmoi.hostname | lower | hasPrefix "vm") }}
+is_vm = true
+{{- else }}
+is_vm = false
+{{- end }}

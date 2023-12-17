@@ -1,4 +1,4 @@
-{{- if .attribute.is_cloud_desktop }}
+{{- if (or .attribute.is_cloud_desktop .attribute.is_vm) }}
 # cloud desktops don't install kitty
 .config/kitty/
 
