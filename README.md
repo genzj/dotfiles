@@ -23,6 +23,8 @@ External repos:
 
 * [Tmux config](https://github.com/genzj/tmux-myconf)
 * [Tmux plugin manager](https://github.com/tmux-plugins/tpm)
+* [Oh-my-fish config](https://github.com/genzj/my-omf-config)
+
 
 ## Planned Configurations
 
@@ -30,10 +32,6 @@ External repos:
 |-------------- | -------------- | ------------------------ | -------------- |
 | Zsh           | MacOS/Linux    | zshrc, omz, p10k, 3rd plugins | take from MacOS |
 | ptpython      |                | config                   | TBD            |
-
-External repos:
-
-* [Oh-my-fish config](https://github.com/genzj/my-omf-config)
 
 ## Out of Scope (for now)
 

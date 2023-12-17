@@ -9,3 +9,10 @@
     type = "git-repo"
     url = "https://github.com/tmux-plugins/tpm.git"
     refreshPeriod = "168h"
+
+[".config/omf"]
+    type = "git-repo"
+    url = "https://github.com/genzj/my-omf-config.git"
+    refreshPeriod = "24h"
+    [".config/omf".pull]
+        args = ["--ff-only"]
