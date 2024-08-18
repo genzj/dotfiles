@@ -4,18 +4,11 @@
         "$HOME/.cargo/env"
     )
 
-    for d in maybe_env ; do
+    for d in $maybe_env ; do
         [[ -f "$d" ]] && source "$d"
     done
 }
 # {{ "}}}" }}
-
-{{- if .tool.mise.keep_pyenv }}
-# Pyenv {{ "{{{" }}
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-# {{ "}}}" }}
-{{- end }}
 
 # Path setting {{ "{{{" }}
 () {
@@ -29,9 +22,9 @@ eval "$(pyenv init -)"
 {{- if .tool.mise.use_shim }}
         "$HOME/.local/share/mise/shims"
 {{- end }}
-)
+    )
 
-    for d in maybe_path ; do
+    for d in $maybe_path ; do
         if [[ -d "$d" ]] ; then
             export PATH="$d:$PATH"
         fi
@@ -39,6 +32,14 @@ eval "$(pyenv init -)"
 
 }
 # {{ "}}}" }}
+
+{{- if .tool.mise.keep_pyenv }}
+
+# Pyenv {{ "{{{" }}
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+# {{ "}}}" }}
+{{- end }}
 
 # Basic Color {{ "{{{" }}
 type dircolors &>/dev/null && eval `dircolors -b`
@@ -209,7 +210,7 @@ function local_devels {
         "$HOME/.local/share/mechanic/complete.zsh" 
     )
 
-    for d in maybe_env ; do
+    for d in $maybe_env ; do
         [[ -f "$d" ]] && source "$d"
     done
 }
