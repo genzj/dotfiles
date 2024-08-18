@@ -1,0 +1,223 @@
+# External Env I -- Env may be used by this script {{ "{{{" }}
+() {
+    local maybe_env=(
+        "$HOME/.cargo/env"
+    )
+
+    for d in maybe_env ; do
+        [[ -f "$d" ]] && source "$d"
+    done
+}
+# {{ "}}}" }}
+
+{{- if .tool.mise.keep_pyenv }}
+# Pyenv {{ "{{{" }}
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+# {{ "}}}" }}
+{{- end }}
+
+# Path setting {{ "{{{" }}
+() {
+    local maybe_path=(
+        "$HOME/.toolbox/bin"
+        "/local/home/$USER/.local/bin"
+        "$HOME/.local/bin"
+        "$HOME/.local/nvim/bin"
+        "$HOME/.cargo/bin"
+        "$PYENV_ROOT/bin"
+{{- if .tool.mise.use_shim }}
+        "$HOME/.local/share/mise/shims"
+{{- end }}
+)
+
+    for d in maybe_path ; do
+        if [[ -d "$d" ]] ; then
+            export PATH="$d:$PATH"
+        fi
+    done
+
+}
+# {{ "}}}" }}
+
+# Basic Color {{ "{{{" }}
+type dircolors &>/dev/null && eval `dircolors -b`
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+# {{ "}}}" }}
+
+# Aliases {{ "{{{" }}
+{{- if .attribute.is_cloud_desktop }}
+alias mwinit='command mwinit -o -s'
+alias register_with_aaa="/apollo/env/AAAWorkspaceSupport/bin/register_with_aaa.py"
+alias alarmist='adhoc-exec JDK8-1.0,Alarmist-1.0 alarmist'
+{{- else }}
+alias mwinit='command mwinit -s'
+alias kssh='kitten ssh'
+alias alogin='( cd /Users/zhuje/workplace/python/alogin/ && /Users/zhuje/workplace/python/alogin/.venv/bin/alogin ; )'
+alias docker='finch'
+{{- end }}
+
+
+type lsd &>/dev/null && alias ls="$(which lsd)"
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+
+alias bb=brazil-build
+alias bba='brazil-build apollo-pkg'
+alias bre='brazil-runtime-exec'
+alias brc='brazil-recursive-cmd'
+alias bws='brazil ws'
+alias bwsuse='bws use --gitMode -p'
+alias bwscreate='bws create -n'
+alias brc=brazil-recursive-cmd
+alias bbr='brc brazil-build'
+alias bball='brc --allPackages'
+alias bbb='brc --allPackages brazil-build'
+alias bbra='bbr apollo-pkg'
+
+# alias myada='ada credentials update --account=zhuje-dev --provider=conduit --role=IibsAdminAccess-DO-NOT-DELETE'
+# {{ "}}}" }}
+
+# Keybind {{ "{{{" }}
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+bindkey "^[." insert-last-word
+# {{ "}}}" }}
+
+# Completion {{ "{{{" }}
+fpath+=~/.zsh/completion
+fpath+=~/.zfunc
+if type brew &>/dev/null; then
+    fpath+="$(brew --prefix)/share/zsh-completions"
+fi
+zstyle ':completion:*' menu select
+# compinit -u will unload the completions which have been loaded by omz plugins
+# autoload -U compinit && compinit -u
+autoload -Uz compinit && compinit
+type kssh &>/dev/null && compdef _ssh kssh
+# {{ "}}}" }}
+
+# Autoload functions {{ "{{{" }}
+function {
+    local f
+    for f in ~/.zfunc/* ; do
+        [[ $f != _* ]] && autoload -Uz "$f"
+    done
+}
+# {{ "}}}" }}
+
+# Prompts {{ "{{{" }}
+function prompt_my_midway_lifetime {
+    local midway_cookie="$HOME/.midway/cookie"
+    local icon=$'\uf805'
+    integer now="$(date "+%s")"
+    integer valid_before="$(grep "^#HttpOnly_midway-auth.amazon.com" "$midway_cookie" 2>/dev/null | cut -f 5 2>/dev/null)"
+    integer lifetime=$((valid_before - now))
+    if (( lifetime <= 0 )) ; then
+        p10k segment -s OVERDUE -i $icon -b red -t "Overdue"
+    elif (( lifetime <= 300 )) ; then
+        p10k segment -s STALE -i $icon -b yellow -t "${lifetime}s"
+    elif (( lifetime <= 3600 )) ; then
+        p10k segment -s VALID -i $icon -b blue -t "$((lifetime/60))m"
+    else
+        p10k segment -s VALID -i $icon -b green -t "$((lifetime/3600))h"
+    fi
+}
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=my_midway_lifetime
+
+# For mise
+# https://github.com/romkatv/powerlevel10k/issues/2212#issuecomment-1889088975
+() {
+    function prompt_mise() {
+        local plugins=("${(@f)$(mise ls --current 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/mise/config.toml" {print $1, $2}')}")
+        local plugin
+        for plugin in ${(k)plugins}; do
+        local parts=("${(@s/ /)plugin}")
+        local tool=${(U)parts[1]}
+        local version=${parts[2]}
+        p10k segment -r -i "${tool}_ICON" -s $tool -t "$version"
+        done
+    }
+
+    # Colors
+    typeset -g POWERLEVEL9K_MISE_BACKGROUND=1
+
+    typeset -g POWERLEVEL9K_MISE_DOTNET_CORE_BACKGROUND=5
+    typeset -g POWERLEVEL9K_MISE_ELIXIR_BACKGROUND=5
+    typeset -g POWERLEVEL9K_MISE_ERLANG_BACKGROUND=1
+    typeset -g POWERLEVEL9K_MISE_FLUTTER_BACKGROUND=4
+    typeset -g POWERLEVEL9K_MISE_GOLANG_BACKGROUND=4
+    typeset -g POWERLEVEL9K_MISE_HASKELL_BACKGROUND=3
+    typeset -g POWERLEVEL9K_MISE_JAVA_BACKGROUND=7
+    typeset -g POWERLEVEL9K_MISE_JULIA_BACKGROUND=2
+    typeset -g POWERLEVEL9K_MISE_LUA_BACKGROUND=4
+    typeset -g POWERLEVEL9K_MISE_NODEJS_BACKGROUND=2
+    typeset -g POWERLEVEL9K_MISE_PERL_BACKGROUND=4
+    typeset -g POWERLEVEL9K_MISE_PHP_BACKGROUND=5
+    typeset -g POWERLEVEL9K_MISE_POSTGRES_BACKGROUND=6
+    typeset -g POWERLEVEL9K_MISE_PYTHON_BACKGROUND=4
+    typeset -g POWERLEVEL9K_MISE_RUBY_BACKGROUND=1
+    typeset -g POWERLEVEL9K_MISE_RUST_BACKGROUND=208
+
+    # Substitute the default asdf prompt element
+    typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=("${POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS[@]/asdf/mise}")
+
+    # additional colors and icons
+    typeset -g POWERLEVEL9K_MISE_GRADLE_BACKGROUND=7
+    typeset -g POWERLEVEL9K_GRADLE_ICON='\ue660'
+}
+# {{ "}}}" }}
+
+# fzf {{ "{{{" }}
+
+fzf_fd_opt='--hidden --follow --exclude "Google Drive" --exclude ".lsp_symlink" --exclude ".bemol" --exclude ".git" --exclude "node_modules" --exclude "site-packages"'
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+
+_fzf_compgen_path() {
+    eval "fd $fzf_fd_opt . \"$1\""
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+    eval "fd $fzf_fd_opt --type d . \"$1\""
+}
+
+export FZF_ALT_C_COMMAND="command fd $fzf_fd_opt --type d ."
+# {{ "}}}" }}
+
+{{- if .attribute.is_cloud_desktop }}
+# Local Development Libs {{ "{{{" }}
+function local_devels {
+    export CFLAGS="-I $HOME/ncurses/installed/include/ -I $HOME/ncurses/installed/include/ncurses ${CFLAGS}"
+    export CXXFLAGS="-I $HOME/ncurses/installed/include/ -I $HOME/ncurses/installed/include/ncurses ${CXXFLAGS}"
+    export LDFLAGS="-L $HOME/ncurses/installed/lib/ ${LDFLAGS}"
+}
+# {{ "}}}" }}
+{{- end }}
+
+# External Env II -- Env may change auto completion {{ "{{{" }}
+() {
+    local maybe_env=(
+        "$HOME/.autojump/etc/profile.d/autojump.sh"
+        "$HOME/.fzf.zsh"
+        "$HOME/.local/share/mechanic/complete.zsh" 
+    )
+
+    for d in maybe_env ; do
+        [[ -f "$d" ]] && source "$d"
+    done
+}
+# {{ "}}}" }}
+
+# mise {{ "{{{" }}
+# use oh-my-zsh mise plugin instead
+# [[ -s ~/.local/bin/mise ]] && eval "$(~/.local/bin/mise activate zsh)"
+# {{ "}}}" }}
+
+# vim: set foldmethod=marker foldlevel=0:
