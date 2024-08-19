@@ -132,7 +132,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=my_midway_lifetime
 # https://github.com/romkatv/powerlevel10k/issues/2212#issuecomment-1889088975
 () {
     function prompt_mise() {
-        local plugins=("${(@f)$(mise ls --current 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3!="~/.config/mise/config.toml" {print $1, $2}')}")
+        local plugins=("${(@f)$(mise ls --current 2>/dev/null | awk '!/\(symlink\)/ && $3!="~/.tool-versions" && $3 !~ /\.config\/mise\/config\.toml$/ {print $1, $2}')}")
         local plugin
         for plugin in ${(k)plugins}; do
         local parts=("${(@s/ /)plugin}")
