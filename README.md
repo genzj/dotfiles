@@ -12,8 +12,8 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 1. [Install zim](https://zimfw.sh/docs/install/) or disable it by change config
     `data.tool.zsh.use_zim` to false. Following tools are recommended and
     integrated into the zim config:
-    1. [Install starship](https://starship.rs/installing/).
-    1. [Install fzf](https://starship.rs/installing/)
+    1. [Install starship](https://starship.rs/guide/#%F0%9F%9A%80-installation).
+    1. [Install fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation)
     1. [Install zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
 1. [Install mise](https://mise.jdx.dev/getting-started.html).
 
@@ -59,3 +59,12 @@ Most of the Neovide customizations are also included in the mynvim repo as lua
 scripts. Neovide [config file](https://neovide.dev/config-file.html) is for a
 different set of configurations which I don't need to alter because their
 default values works well for me. So it's not managed by this repo either.
+
+## Troubleshooting
+
+### `is-at-least` function error during `zimfw` execution
+
+The function definition is missing in some "internal" patched zsh 5.x. Download
+it from
+[here](https://github.com/zsh-users/zsh/blob/master/Functions/Misc/is-at-least)
+and put it under the system-level zsh function folder.
