@@ -7,6 +7,8 @@
 .config/.czrc
 {{- end }}
 
-{{- if not .tool.zsh.use_zim }}
+{{- if .tool.zsh.use_zim }}
+.zshrc-post-omz
+{{- else }}
 .zshrc
 {{- end }}
