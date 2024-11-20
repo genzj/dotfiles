@@ -12,7 +12,10 @@ Host jumper.genzj.info
     # ProxyJump None
     ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
 
-Host docker.genzj.info share.genzj.info j.genzj.info monitor.genzj.info pve.genzj.info photo.genzj.info dav.genzj.info 192.168.1.*
+Host 
+    {{- range $index, $element := .ssh.homelab_hosts -}}
+        {{ " " }}{{ $element }}
+    {{- end }}
     User genzj
     ServerAliveInterval 120
     # ProxyJump proxy@jumper.genzj.info
