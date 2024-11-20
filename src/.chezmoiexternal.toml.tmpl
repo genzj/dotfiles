@@ -16,3 +16,10 @@
     refreshPeriod = "24h"
     [".config/omf".pull]
         args = ["--ff-only"]
+
+{{- if and .attribute.is_amzn .tool.zsh.use_zim }}
+["zim-amzn-dev"]
+    type = "git-repo"
+    url = "ssh://git.amazon.com/pkg/ZimAmznDev"
+    refreshPeriod = "24h"
+{{- end }}

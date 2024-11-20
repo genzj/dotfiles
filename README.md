@@ -7,6 +7,11 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 1. [Install chezmoi](https://www.chezmoi.io/install/)
 1. Apply the dotfiles by running `chezmoi init --apply genzj` [ref](https://www.chezmoi.io/reference/commands/init/)
 
+## Tools
+
+1. [Install zim](https://zimfw.sh/docs/install/) or disable it by change config `data.tool.zsh.use_zim` to false.
+1. (Optional) [Install mise](https://mise.jdx.dev/getting-started.html).
+
 ## Managed Configurations
 
 | App           | OS             | Platforms      | Notes          |
@@ -17,20 +22,19 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 | Bat           | MacOS/Linux    | All            | Contrast-enhanced theme (twodark-genzj), config |
 | czg           | MacOS/Linux    | All            | Needs age key. Excl. CloudDesktop |
 | tmux          | MacOS/Linux    | All            | Work with my tmux config and tpm (see External repos below) |
-
+| zsh           | MacOS/Linux    | All            | Zim only |
 
 External repos:
 
 * [Tmux config](https://github.com/genzj/tmux-myconf)
 * [Tmux plugin manager](https://github.com/tmux-plugins/tpm)
 * [Oh-my-fish config](https://github.com/genzj/my-omf-config)
-
+* ZimAmznDev (only on working environments)
 
 ## Planned Configurations
 
 | App group     | OS             | Items                    | Notes          |
 |-------------- | -------------- | ------------------------ | -------------- |
-| Zsh           | MacOS/Linux    | zshrc, omz, p10k, 3rd plugins | take from MacOS |
 | ptpython      |                | config                   | TBD            |
 
 ## Out of Scope (for now)

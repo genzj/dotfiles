@@ -6,3 +6,7 @@
 # but didn't find a way to separate it from the config file
 .config/.czrc
 {{- end }}
+
+{{- if not .tool.zsh.use_zim }}
+.zshrc
+{{- end }}

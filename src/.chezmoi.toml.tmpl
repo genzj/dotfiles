@@ -1,5 +1,6 @@
 encryption = "age"
 
+# TODO make sure the age-key file exists before setting up this section
 [age]
 identity = "{{ .chezmoi.homeDir }}/.age-key.txt"
 recipient = "age1z6jxknjgj22tln9z7fpevml6sv6rgcfmtym9kqvgepf5z4gkfsvqqk9pva"
@@ -38,6 +39,12 @@ http_proxy = "127.0.0.1:8123"
 socks5_proxy = "127.0.0.1:1080"
 
 [data.attribute]
+{{- if (eq .chezmoi.username "zhuje") }}
+is_amzn = true
+{{- else }}
+is_amzn = false
+{{- end }}
+
 {{- if (and (eq .chezmoi.username "zhuje") (ne .chezmoi.os "darwin" )) }}
 is_cloud_desktop = true
 {{- else }}
@@ -54,3 +61,6 @@ is_vm = false
 use_shim = false
 keep_pyenv = false
 
+# TODO remove this after migrating all envs to zim
+[data.tool.zsh]
+use_zim = true
