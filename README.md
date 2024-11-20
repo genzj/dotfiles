@@ -9,8 +9,13 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 
 ## Tools
 
-1. [Install zim](https://zimfw.sh/docs/install/) or disable it by change config `data.tool.zsh.use_zim` to false.
-1. (Optional) [Install mise](https://mise.jdx.dev/getting-started.html).
+1. [Install zim](https://zimfw.sh/docs/install/) or disable it by change config
+    `data.tool.zsh.use_zim` to false. Following tools are recommended and
+    integrated into the zim config:
+    1. [Install starship](https://starship.rs/installing/).
+    1. [Install fzf](https://starship.rs/installing/)
+    1. [Install zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
+1. [Install mise](https://mise.jdx.dev/getting-started.html).
 
 ## Managed Configurations
 
@@ -36,6 +41,10 @@ External repos:
 | App group     | OS             | Items                    | Notes          |
 |-------------- | -------------- | ------------------------ | -------------- |
 | ptpython      |                | config                   | TBD            |
+
+## Other Planned Features
+
+[ ] Install tools automatically
 
 ## Out of Scope (for now)
 
