@@ -20,7 +20,6 @@ $status\
 """
 
 right_format = """
-${custom.midway_overdue}\
 [$all](fg:#aaaa77)\
 """
 # A continuation prompt that displays two filled-in arrows
@@ -202,4 +201,13 @@ when = '$HOME/zim-amzn-dev/scripts/test_my_midway_lifetime 3600 900000'
 format = '[$symbol $output ]($style)'
 style = 'green'
 symbol = '󱕴'
+
+# TODO move this to a general module from zim-amzn-dev
+[custom.cpu_arch]
+shell = "/bin/zsh"
+command = '$HOME/zim-amzn-dev/scripts/prompt_cpu_arch'
+when = true
+format = '[$symbol $output ]($style)'
+style = 'blue'
+symbol = '󰘚'
 {{ end -}}
