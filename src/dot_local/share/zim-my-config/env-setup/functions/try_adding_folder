@@ -1,0 +1,14 @@
+# Function to add a directory to array if it doesn't already exist
+# Usage: try_adding_folder FOLDER ARRAY_NAME
+local dir="$1"
+local array_name="$2"
+local array="${(P)array_name}"
+
+[[ -d "$dir" ]] && return 0
+
+# Check if the directory is already in fpath
+if [[ ! "${array[(I)$dir]}" -gt 0 ]]; then
+    # Directly add to array
+    eval "$array_name+=(\"\$dir\")"
+fi
+
