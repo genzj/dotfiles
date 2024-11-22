@@ -1,6 +1,7 @@
 # Path setting (((
 () {
     local maybe_path=(
+        "$HOME/bin"
         "$HOME/.local/bin"
         "$HOME/.local/nvim/bin"
         "$PYENV_ROOT/bin"

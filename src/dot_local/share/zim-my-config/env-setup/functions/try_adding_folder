@@ -4,7 +4,7 @@ local dir="$1"
 local array_name="$2"
 local array="${(P)array_name}"
 
-[[ -d "$dir" ]] && return 0
+[[ -d "$dir" ]] || return 0
 
 # Check if the directory is already in fpath
 if [[ ! "${array[(I)$dir]}" -gt 0 ]]; then
