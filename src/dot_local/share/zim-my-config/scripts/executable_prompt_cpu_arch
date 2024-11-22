@@ -1,3 +1,4 @@
+#!/bin/zsh -
 # Taken from p10k https://github.com/romkatv/powerlevel10k/blob/ef83e13c22cf8641f7ab2d50cd1338d01bb31cd2/internal/p10k.zsh#L5746
 setopt EXTENDED_GLOB
 if [[ -r /proc/sys/kernel/arch ]]; then
@@ -6,7 +7,7 @@ else
   local cmd
   for cmd in machine arch; do
     which "$cmd" &>/dev/null || continue
-    if text=$(command -- $cmd) 2>/dev/null ; then
+    if text=$(command -- $cmd) 2>/dev/null && [[ $text == [a-zA-Z][a-zA-Z0-9_]# ]] ; then
       break
     else
       text=
