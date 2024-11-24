@@ -5,7 +5,7 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 ## Apply
 
 1. [Install chezmoi](https://www.chezmoi.io/install/)
-1. Apply the dotfiles by running `chezmoi init --apply genzj` [ref](https://www.chezmoi.io/reference/commands/init/)
+1. Apply the dotfiles by running `chezmoi init --apply genzj` ([ref](https://www.chezmoi.io/reference/commands/init/))
 
 ## Tools
 
@@ -15,6 +15,14 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
     1. [Install starship](https://starship.rs/guide/#%F0%9F%9A%80-installation).
     1. [Install fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation)
     1. [Install zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
+1. If you use Ubuntu and installed Zsh with apt, then add the following line to
+    your ~/.zshenv file to stop `/etc/zsh/zshrc` from calling `compinit`
+    ([ref](https://github.com/zimfw/zimfw/wiki/Troubleshooting#completion-is-not-working)):
+
+    ```sh
+    skip_global_compinit=1
+    ```
+
 1. [Install mise](https://mise.jdx.dev/getting-started.html).
 
 ## Managed Configurations
