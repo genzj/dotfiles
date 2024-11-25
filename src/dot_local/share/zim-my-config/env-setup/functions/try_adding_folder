@@ -9,6 +9,6 @@ local array="${(P)array_name}"
 # Check if the directory is already in fpath
 if [[ ! "${array[(I)$dir]}" -gt 0 ]]; then
     # Directly add to array
-    eval "$array_name+=(\"\$dir\")"
+    eval "$array_name=(\"\$dir\" \$$array_name)"
 fi
 
