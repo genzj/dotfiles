@@ -1,6 +1,5 @@
 encryption = "age"
 
-# TODO make sure the age-key file exists before setting up this section
 [age]
 identity = "{{ .chezmoi.homeDir }}/.age-key.txt"
 recipient = "age1z6jxknjgj22tln9z7fpevml6sv6rgcfmtym9kqvgepf5z4gkfsvqqk9pva"
@@ -55,6 +54,12 @@ socks5_proxy = "127.0.0.1:1080"
 is_amzn = true
 {{- else }}
 is_amzn = false
+{{- end }}
+
+{{- if and (joinPath .chezmoi.homeDir ".age-key.txt" | stat) (eq (joinPath .chezmoi.homeDir ".age-key.txt" | stat).type "file") }}
+is_encryption_ready = true
+{{- else }}
+is_encryption_ready = false
 {{- end }}
 
 {{- if (and (eq .chezmoi.username "zhuje") (ne .chezmoi.os "darwin" )) }}

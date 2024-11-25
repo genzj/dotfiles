@@ -1,10 +1,6 @@
 {{- if (or .attribute.is_cloud_desktop .attribute.is_vm) }}
 # cloud desktops don't install kitty
 .config/kitty/
-
-# don't want to install chatGPT token on cloud desktops
-# but didn't find a way to separate it from the config file
-.config/.czrc
 {{- end }}
 
 {{- if .tool.zsh.use_zim }}
@@ -12,4 +8,9 @@
 .p10k.zsh
 {{- else }}
 .zshrc
+{{- end }}
+
+{{- if not .attribute.is_encryption_ready }}
+# don't want to install chatGPT token if no encryption file exists
+.config/.czrc
 {{- end }}
