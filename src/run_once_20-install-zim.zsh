@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh -
+#!/bin/zsh
 
 set -x
 
@@ -20,7 +20,7 @@ set -x
 () {
     (( ${+commands[fzf]} )) && return 0
     curl -fsSL --output "$HOME/.fzf-install" https://github.com/junegunn/fzf/raw/refs/heads/master/install &&
-        sh "$HOME/.fzf-install" --bin
+        bash "$HOME/.fzf-install" --bin
 }
 # )))
 

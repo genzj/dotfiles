@@ -45,6 +45,10 @@ before applying the dotfiles:
     skip_global_compinit=1
     ```
 
+1. More optional tools:
+    - [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation)
+    - [fd-find](https://github.com/sharkdp/fd?tab=readme-ov-file#installation)
+
 ## Managed Configurations
 
 | App           | OS             | Platforms      | Notes          |
@@ -71,6 +75,10 @@ External repos:
 | ptpython      |                | config                   | TBD            |
 
 ## Other Planned Features
+
+[ ] Install mise-managed tools automatically
+    [ ] Cargo dependencies `mise use -g rust`
+    [ ] fd-find and bat (they require `cc` to be installed from cargo.)
 
 ## Out of Scope (for now)
 
