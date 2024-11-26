@@ -4,14 +4,25 @@ This repo manages my dotfiles with [chezmoi](https://www.chezmoi.io/).
 
 ## Apply
 
-```sh
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply genzj
-```
+1. For containers or other minimal env, following tools should be installed
+before applying the dotfiles, e.g. on Ubuntu:
 
-Or, manually apply it by:
+    ```sh
+    sudo apt install -y git curl zsh tmux
+    ```
 
-1. [Install chezmoi](https://www.chezmoi.io/install/)
-1. Apply the dotfiles by running `chezmoi init --apply genzj` ([ref](https://www.chezmoi.io/reference/commands/init/))
+1. Check [Tools](#tools) and install the tools which should **not** be
+automatically installed.
+
+1. One-liner to apply the dotfiles:
+
+    ```sh
+    sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply genzj
+    ```
+
+1. Or, manually apply it by:
+    1. [Install chezmoi](https://www.chezmoi.io/install/)
+    1. Apply the dotfiles by running `chezmoi init --apply genzj` ([ref](https://www.chezmoi.io/reference/commands/init/))
 
 ## Tools
 
@@ -29,13 +40,6 @@ to false, or following tools will be automatically installed
     - [zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
 
 ## Other Configurations
-
-1. For containers or other minimal env, following tools should be installed
-before applying the dotfiles:
-
-    ```sh
-    sudo apt install -y git curl zsh tmux
-    ```
 
 1. If you use Ubuntu and installed Zsh with apt, then add the following line to
     your ~/.zshenv file to stop `/etc/zsh/zshrc` from calling `compinit`
@@ -78,7 +82,7 @@ External repos:
 
 [ ] Install mise-managed tools automatically
     [ ] Cargo dependencies `mise use -g rust`
-    [ ] fd-find and bat (they require `cc` to be installed from cargo.)
+    [ ] fd-find and bat (they require `cc` to be installed from mise & cargo.)
 
 ## Out of Scope (for now)
 
