@@ -21,7 +21,7 @@ set -x
     (( ${+commands[apt]} )) || return 0
     apt list --installed zsh 2>/dev/null | grep -q ubuntu || return 0
     grep -q 'skip_global_compinit' ~/.zshenv 2>/dev/null && return 0
-    echo 'skip_global_compinit=1' >> ~/.zshenv
+    echo 'skip_global_compinit=1' >>! ~/.zshenv
 }
 #)))
 
