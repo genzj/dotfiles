@@ -8,6 +8,8 @@
 
 # Sets sane Zsh built-in environment options.
 zmodule environment
+# My customizations
+zmodule $HOME/.local/share/zim-my-config/env-setup
 # Set up homebrew env and aliases
 zmodule homebrew
 # Provides handy git aliases and functions.
@@ -28,8 +30,6 @@ zmodule zsh-users/zsh-autosuggestions
 zmodule joke/zim-chezmoi
 zmodule joke/zim-mise
 zmodule kiesman99/zim-zoxide
-# My customizations
-zmodule $HOME/.local/share/zim-my-config/env-setup
 {{ if .attribute.is_amzn -}}
 zmodule $HOME/zim-amzn-dev/env-setup
 {{ end -}}
