@@ -34,14 +34,20 @@ install them before applying the dotfiles.
 1. [mise](https://mise.jdx.dev/getting-started.html) will be automatically installed.
 1. If ZIM is not desired, disable ZIM by change config `data.tool.zsh.use_zim`
 to false, or following tools will be automatically installed
-    - [Zim](https://zimfw.sh/docs/install/)
-    - [starship](https://starship.rs/guide/#%F0%9F%9A%80-installation).
     - [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation)
+    - [starship](https://starship.rs/guide/#%F0%9F%9A%80-installation).
+    - [Zim](https://zimfw.sh/docs/install/)
     - [zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
+1. Following tools will be automatically installed if they are not found in the PATH
+    - [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation)
+    - [fd](https://github.com/sharkdp/fd?tab=readme-ov-file#installation)
+    - [ripgrep](https://github.com/BurntSushi/ripgrep)
 
-## Other Configurations
+## Post Update Configurations
 
-1. If you use Ubuntu and installed Zsh with apt, then add the following line to
+See `run_after_99-post-actions.zsh` for details.
+
+1. If you use Ubuntu and install Zsh with apt, the script will add the following line to
     your ~/.zshenv file to stop `/etc/zsh/zshrc` from calling `compinit`
     ([ref](https://github.com/zimfw/zimfw/wiki/Troubleshooting#completion-is-not-working)):
 
@@ -49,9 +55,8 @@ to false, or following tools will be automatically installed
     skip_global_compinit=1
     ```
 
-1. More optional tools:
-    - [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation)
-    - [fd-find](https://github.com/sharkdp/fd?tab=readme-ov-file#installation)
+1. Rebuild bat theme cache
+1. Reinstall Zim modules to make sure they are using the degit
 
 ## Managed Configurations
 
@@ -79,10 +84,6 @@ External repos:
 | ptpython      |                | config                   | TBD            |
 
 ## Other Planned Features
-
-[ ] Install mise-managed tools automatically
-    [ ] Cargo dependencies `mise use -g rust`
-    [ ] fd-find and bat (they require `cc` to be installed from mise & cargo.)
 
 ## Out of Scope (for now)
 

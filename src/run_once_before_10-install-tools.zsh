@@ -26,6 +26,17 @@ mkdir -p "$HOME/.local/bin"
 }
 # )))
 
+# Install bat (((
+() {
+    (( ${+commands[bat]} )) && return 0
+    if (( ${+commands[batcat]} )) ; then
+        [[ -e "$HOME/.local/bin/bat" ]] || ln -s "${commands[batcat]}" "$HOME/.local/bin/bat"
+        return 0
+    fi
+    "${CHEZMOI_SOURCE_DIR}/../scripts/bat-install.sh" --bin-dir ~/.local/bin
+}
+# )))
+
 # Install ripgrep (((
 () {
     (( ${+commands[rg]} )) && return 0
