@@ -15,15 +15,12 @@ NO_COLOR="$(tput sgr0 2>/dev/null || printf '')"
 
 SUPPORTED_TARGETS="aarch64-apple-darwin \
   aarch64-unknown-linux-gnu \
-  aarch64-unknown-linux-musl \
-  arm-unknown-linux-gnueabihf \
-  arm-unknown-linux-musleabihf \
+  armv7-unknown-linux-gnueabihf \
+  armv7-unknown-linux-musleabihf \
   i686-pc-windows-msvc \
-  i686-unknown-linux-gnu \
   i686-unknown-linux-musl \
   x86_64-apple-darwin \
   x86_64-pc-windows-msvc \
-  x86_64-unknown-linux-gnu \
   x86_64-unknown-linux-musl \
 "
 info() {
@@ -39,7 +36,11 @@ error() {
 }
 
 completed() {
-  printf '%s\n' "${GREEN}✓${NO_COLOR} $*"
+  if test -e "${BIN_DIR}/rg" -o -e "${BIN_DIR}/rg.exe" ; then
+    printf '%s\n' "${GREEN}✓${NO_COLOR} $*"
+  else
+    printf '%s\n' "${RED}x${NO_COLOR} didn't find rg under ${BIN_DIR}"
+  fi
 }
 
 has() {
@@ -74,7 +75,7 @@ get_tmpdir() {
     mktemp -d
   else
     # No really good options here--let's pick a default + hope
-    printf "/tmp/fdfind-install-tmp"
+    printf "/tmp/ripgrep-install-tmp"
   fi
 }
 
@@ -84,7 +85,7 @@ get_tmpfile() {
     printf "%s.%s" "$(mktemp)" "${suffix}"
   else
     # No really good options here--let's pick a default + hope
-    printf "/tmp/fdfind.%s" "${suffix}"
+    printf "/tmp/ripgrep.%s" "${suffix}"
   fi
 }
 
@@ -105,7 +106,7 @@ download() {
   url="$2"
 
   if has curl && curl_is_snap; then
-    warn "curl installed through snap cannot download fd."
+    warn "curl installed through snap cannot download ripgrep."
     warn "See https://github.com/starship/starship/issues/5403 for details."
     warn "Searching for other HTTP download programs..."
   fi
@@ -125,10 +126,10 @@ download() {
 
   error "Command failed (exit code $rc): ${BLUE}${cmd}${NO_COLOR}"
   printf "\n" >&2
-  info "This is likely due to fd not yet supporting your configuration."
+  info "This is likely due to ripgrep not yet supporting your configuration."
   info "If you would like to see a build for your configuration,"
   info "please create an issue requesting a build for ${MAGENTA}${TARGET}${NO_COLOR}:"
-  info "${BOLD}${UNDERLINE}https://github.com/sharkdp/fd/issues/new/${NO_COLOR}"
+  info "${BOLD}${UNDERLINE}https://github.com/BurnSushi/ripgrep/issues/new/${NO_COLOR}"
   return $rc
 }
 
@@ -152,14 +153,14 @@ unpack() {
       error "Unknown package extension."
       printf "\n"
       info "This almost certainly results from a bug in this script--please file a"
-      info "bug report at https://github.com/sharkdp/fd/issues"
+      info "bug report at https://github.com/BurnSushi/ripgrep/issues"
       return 1
       ;;
   esac
 
-  for file in fd fd.exe
+  for file in rg rg.exe
   do
-    source="${tmp_dir}/fd-${VERSION}-${TARGET}/${file}"
+    source="${tmp_dir}/ripgrep-${VERSION}-${TARGET}/${file}"
     test -f "${source}" || continue
     test -n "${VERBOSE-}" && info "Copying ${source} to ${bin_dir}"
     ${sudo} cp -p "${source}" "${bin_dir}"
@@ -173,7 +174,7 @@ usage() {
   printf "%s\n" \
     "install.sh [option]" \
     "" \
-    "Fetch and install the latest version of fd if fd is already" \
+    "Fetch and install the latest version of ripgrep if ripgrep is already" \
     "installed it will be updated to the latest version."
 
   printf "\n%s\n" "Options"
@@ -184,7 +185,7 @@ usage() {
     "-b, --bin-dir" "Override the bin installation directory [default: ${BIN_DIR}]" \
     "-a, --arch" "Override the architecture identified by the installer [default: ${ARCH}]" \
     "-B, --base-url" "Override the base URL used for downloading releases [default: ${BASE_URL}]" \
-    "-v, --version" "Install a specific version of fd [default: ${VERSION}]" \
+    "-v, --version" "Install a specific version of ripgrep [default: ${VERSION}]" \
     "-h, --help" "Display this help message"
 }
 
@@ -207,12 +208,12 @@ install() {
 
   if test_writeable "${BIN_DIR}"; then
     sudo=""
-    msg="Installing fd, please wait…"
+    msg="Installing ripgrep, please wait…"
   else
     warn "Escalated permissions are required to install to ${BIN_DIR}"
     elevate_priv
     sudo="sudo"
-    msg="Installing fd as root, please wait…"
+    msg="Installing ripgrep as root, please wait…"
   fi
   info "$msg"
 
@@ -258,7 +259,7 @@ detect_arch() {
 
   case "${arch}" in
     amd64) arch="x86_64" ;;
-    armv*) arch="arm" ;;
+    armv7*) arch="armv7" ;;
     arm64) arch="aarch64" ;;
   esac
 
@@ -266,7 +267,7 @@ detect_arch() {
   if [ "${arch}" = "x86_64" ] && [ "$(getconf LONG_BIT)" -eq 32 ]; then
     arch=i686
   elif [ "${arch}" = "aarch64" ] && [ "$(getconf LONG_BIT)" -eq 32 ]; then
-    arch=arm
+    arch=armv7
   fi
 
   printf '%s' "${arch}"
@@ -279,6 +280,9 @@ detect_target() {
 
   if [ "${target}" = "arm-unknown-linux-musl" ]; then
     target="${target}eabihf"
+  elif [ "${target}" = "aarch64-unknown-linux-musl" ]; then
+    # TODO remove this workaround when ripgrep supports aarch64 musl
+    target="aarch64-unknown-linux-gnu"
   fi
 
   printf '%s' "${target}"
@@ -334,7 +338,7 @@ get_latest_version() {
         -H "Accept: application/vnd.github+json" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
         "$LATEST_RELEASE_API_URL" | \
-        grep '"name": "v' | \
+        grep '"name": "[[:digit:]]' | \
         head -1 | \
         cut -d '"' -f 4
 }
@@ -355,11 +359,11 @@ is_build_available() {
   )
 
   if [ "${good}" != "1" ]; then
-    error "${arch} builds for ${platform} are not yet available for fd"
+    error "${arch} builds for ${platform} are not yet available for ripgrep"
     printf "\n" >&2
     info "If you would like to see a build for your configuration,"
     info "please create an issue requesting a build for ${MAGENTA}${target}${NO_COLOR}:"
-    info "${BOLD}${UNDERLINE}https://github.com/sharkdp/fd/issues/new/${NO_COLOR}"
+    info "${BOLD}${UNDERLINE}https://github.com/BurntSushi/ripgrep/issues/new/${NO_COLOR}"
     printf "\n"
     exit 1
   fi
@@ -379,11 +383,11 @@ if [ -z "${ARCH-}" ]; then
 fi
 
 if [ -z "${LATEST_RELEASE_API_URL-}" ]; then
-  LATEST_RELEASE_API_URL="https://api.github.com/repos/sharkdp/fd/releases/latest"
+  LATEST_RELEASE_API_URL="https://api.github.com/repos/BurntSushi/ripgrep/releases/latest"
 fi
 
 if [ -z "${BASE_URL-}" ]; then
-  BASE_URL="https://github.com/sharkdp/fd/releases"
+  BASE_URL="https://github.com/BurntSushi/ripgrep/releases"
 fi
 
 if [ -z "${VERSION-}" ]; then
@@ -491,12 +495,12 @@ if [ "${PLATFORM}" = "pc-windows-msvc" ]; then
   EXT=zip
 fi
 
-URL="${BASE_URL}/download/${VERSION}/fd-${VERSION}-${TARGET}.${EXT}"
+URL="${BASE_URL}/download/${VERSION}/ripgrep-${VERSION}-${TARGET}.${EXT}"
 
 info "Tarball URL: ${UNDERLINE}${BLUE}${URL}${NO_COLOR}"
-confirm "Install fd ${GREEN}${VERSION}${NO_COLOR} to ${BOLD}${GREEN}${BIN_DIR}${NO_COLOR}?"
+confirm "Install ripgrep ${GREEN}${VERSION}${NO_COLOR} to ${BOLD}${GREEN}${BIN_DIR}${NO_COLOR}?"
 check_bin_dir "${BIN_DIR}"
 
 install "${EXT}"
-completed "fd ${VERSION} installed"
+completed "ripgrep ${VERSION} installed"
 
