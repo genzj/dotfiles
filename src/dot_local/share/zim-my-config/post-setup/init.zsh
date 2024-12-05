@@ -14,8 +14,11 @@
 # More completion setups (((
 
 # kitten ssh alias
-alias kssh='kitten ssh'
-type kssh &>/dev/null && compdef _ssh kssh
+# use function instead of alias for correct completion
+kssh() {
+    command kitten ssh "$@"
+}
+compdef kssh=ssh
 
 # )))
 
