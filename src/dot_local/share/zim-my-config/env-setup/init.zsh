@@ -5,6 +5,7 @@
         "$HOME/.local/bin"
         "$HOME/.local/nvim/bin"
         "$PYENV_ROOT/bin"
+        "/opt/homebrew/bin"
     )
 
     for d in $maybe_path ; do
