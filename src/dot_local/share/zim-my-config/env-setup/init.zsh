@@ -15,7 +15,9 @@
 
 # Aliases (((
 () {
-
+    alias s='sudo'
+    alias la='ls -a'
+    alias lla='ls -a -l'
 }
 # )))
 
