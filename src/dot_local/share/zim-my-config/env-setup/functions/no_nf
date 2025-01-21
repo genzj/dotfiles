@@ -1,1 +1,6 @@
 export STARSHIP_CONFIG=~/.config/starship-no-nf.toml
+
+restore_nf() {
+    unset STARSHIP_CONFIG
+    unset -f restore_nf
+}
