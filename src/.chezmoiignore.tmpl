@@ -15,3 +15,8 @@
 # don't want to install chatGPT token if no encryption file exists
 .config/.czrc
 {{- end }}
+
+{{- if (ne .chezmoi.os "darwin" ) }}
+# ssh jumper only works with MacOS now
+.ssh/genzj.ssh.config
+{{- end }}
