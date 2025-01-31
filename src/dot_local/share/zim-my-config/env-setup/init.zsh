@@ -100,4 +100,9 @@ if (( ${+FZF_DEFAULT_COMMAND} )) export FZF_CTRL_T_COMMAND=${FZF_DEFAULT_COMMAND
 
 # )))
 
+# Tmux plugin settings (((
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/tmux/README.md
+export ZSH_TMUX_DEFAULT_SESSION_NAME="default"
+# )))
+
 # vim: set foldenable foldmethod=marker foldlevel=0 foldmarker=(((,))):
