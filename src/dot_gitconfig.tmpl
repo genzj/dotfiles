@@ -27,8 +27,7 @@
 {{- end }}
 {{- if (and (eq .chezmoi.os "linux") (not .attribute.is_cloud_desktop) ) }}
 [credential "https://github.com"]
-    ; helper = github -b 'cache --timeout=86400'
-    helper = github -b 'store'
+    helper = github
 {{- end }}
 [credential "https://git-codecommit.us-west-2.amazonaws.com"]
 	provider = generic
