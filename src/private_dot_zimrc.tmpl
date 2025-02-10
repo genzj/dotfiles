@@ -8,10 +8,14 @@
 
 # Sets sane Zsh built-in environment options.
 zmodule environment
-# My customizations
-zmodule $HOME/.local/share/zim-my-config/env-setup
 # Set up homebrew env and aliases
 zmodule homebrew
+
+# My customizations
+# Must be set after homebrew because homebrew plugin resets some environment
+# variables including the PATH
+zmodule $HOME/.local/share/zim-my-config/env-setup
+
 # Provides handy git aliases and functions.
 zmodule git
 # Applies correct bindkeys for input events.

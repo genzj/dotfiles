@@ -4,6 +4,7 @@
         "$HOME/bin"
         "$HOME/.local/bin"
         "$HOME/.local/nvim/bin"
+        "$HOME/.tmux/plugins/tmux-session-wizard/bin"
         "$PYENV_ROOT/bin"
         "/opt/homebrew/bin"
     )
