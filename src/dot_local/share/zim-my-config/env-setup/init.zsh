@@ -61,7 +61,35 @@ _fzf_compgen_dir() {
 }
 
 export FZF_DEFAULT_COMMAND="command fd $fzf_fd_opt --type d --type f"
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 export FZF_ALT_C_COMMAND="command fd $fzf_fd_opt --type d ."
+
+_fzf_zoxide() {
+    setopt localoptions pipefail no_aliases 2> /dev/null
+    local dir="$(
+FZF_DEFAULT_COMMAND=${FZF_ZOXIDE_COMMAND:-} \
+FZF_DEFAULT_OPTS=$(__fzf_defaults "--reverse --walker=dir,follow,hidden --scheme=path" "${FZF_ZOXIDE_OPTS-} +m") \
+FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd) < /dev/tty)"
+    if [[ -z "$dir" ]]
+    then
+            zle redisplay
+            return 0
+    fi
+    zle push-line
+    BUFFER="builtin cd -- ${(q)dir:a}"
+    zle accept-line
+    local ret=$?
+    unset dir
+    zle reset-prompt
+    return $ret
+}
+
+if (( ${+commands[zoxide]} )); then
+    export FZF_ZOXIDE_COMMAND="command zoxide query --list"
+    export FZF_ZOXIDE_OPTS=""
+    zle -N _fzf_zoxide
+    bindkey '^[z' _fzf_zoxide
+fi
 
 # taken from https://github.com/zimfw/fzf/blob/390a9f3adadfa3e244d972524c890a8f18d4d672/init.zsh#L42-L73
 local bat_cmd
@@ -95,6 +123,7 @@ else
   fi
 fi
 export FZF_ALT_C_OPTS="--bind ctrl-/:toggle-preview --preview 'command ${ls_cmd} {}' ${FZF_ALT_C_OPTS}"
+export FZF_ZOXIDE_OPTS="--bind ctrl-/:toggle-preview --preview 'command ${ls_cmd} {}' ${FZF_ZOXIDE_OPTS}"
 unset ls_cmd
 
 if (( ${+FZF_DEFAULT_COMMAND} )) export FZF_CTRL_T_COMMAND=${FZF_DEFAULT_COMMAND}
