@@ -106,7 +106,7 @@ unset bat_cmd
 
 local ls_cmd
 if (( ${+commands[lsd]} )); then
-  ls_cmd='lsd -l --color=always'
+  ls_cmd='lsd -l --icon=always --color=always'
 elif command ls --version &>/dev/null; then
   # GNU
   ls_cmd='ls --group-directories-first --color=always'

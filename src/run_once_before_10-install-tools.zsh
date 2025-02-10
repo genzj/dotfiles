@@ -15,6 +15,8 @@ mkdir -p "$HOME/.local/bin"
 }
 # )))
 
+# TODO: migrate to `mise use -g auqa:xxx` (sharkdp/fd, sharkdp/bat, BurntSushi/ripgrep and lsd-rs/lsd) or `ubi:xxx/yyy` (zoxide)
+# TODO: add lsd-rs/lsd
 # Install fd (((
 () {
     (( ${+commands[fd]} )) && return 0
