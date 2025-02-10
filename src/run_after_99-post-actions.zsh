@@ -16,6 +16,15 @@ set -x
 }
 #)))
 
+# Install and Update tmux plugins (((
+() {
+    test -e "${HOME}/.tmux/plugins/tpm/bin/install_plugins" || return 0
+    "${HOME}/.tmux/plugins/tpm/bin/install_plugins"
+    test -e "${HOME}/.tmux/plugins/tpm/bin/update_plugins" || return 0
+    "${HOME}/.tmux/plugins/tpm/bin/update_plugins" all
+}
+#)))
+
 # Disable global compinit if Zsh is installed by Ubuntu apt (((
 () {
     (( ${+commands[apt]} )) || return 0
