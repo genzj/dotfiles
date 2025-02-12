@@ -1,0 +1,9 @@
+---
+patch:
+  key_binder/bindings/+:
+    - {accept: "bracketleft", send: Page_Up, when: has_menu}
+    - {accept: "bracketright", send: Page_Down, when: has_menu}
+  key_binder/select_first_character: minus
+  key_binder/select_last_character: equal
+  editor/+:
+    "Control+[": cancel
