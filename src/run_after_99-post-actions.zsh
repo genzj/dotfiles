@@ -1,6 +1,10 @@
 #!/bin/zsh
 set -x
 
+if [[ -n $DOT_FILE_IGNORE_POST_ACTION ]] ; then
+    exit 0
+fi
+
 # Rebuild bat theme cache (((
 () {
     (( ${+commands[bat]} )) || return 0
