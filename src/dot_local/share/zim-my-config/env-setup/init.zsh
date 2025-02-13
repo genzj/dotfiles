@@ -35,4 +35,9 @@
 export ZSH_TMUX_DEFAULT_SESSION_NAME="default"
 # )))
 
+# Zsh options (((
+# disable EXTENDED_GLOB to simplify git command inputs
+unsetopt EXTENDED_GLOB
+# )))
+
 # vim: set foldenable foldmethod=marker foldlevel=0 foldmarker=(((,))):
