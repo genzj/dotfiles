@@ -19,5 +19,9 @@
 {{- if (ne .chezmoi.os "darwin" ) }}
 # ssh jumper only works with MacOS now
 .ssh/genzj.ssh.config
-Library/Rime/squirrel.custom.yaml
+Library/
+{{- end }}
+
+{{- if (ne .chezmoi.os "linux" ) }}
+.config/ibus/rime
 {{- end }}
