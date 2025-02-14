@@ -23,3 +23,21 @@
     url = "ssh://git.amazon.com/pkg/ZimAmznDev"
     refreshPeriod = "24h"
 {{- end }}
+
+{{- if (eq .chezmoi.os "darwin" ) }}
+["Library/Rime"]
+    type = "archive"  # use archive instead of git to manage default.custom.yaml file in it
+    url = "https://github.com/gaboolic/rime-frost/archive/refs/heads/master.zip"
+    format = "zip"
+    stripComponents = 1
+    refreshPeriod = "168h"
+{{- end }}
+
+{{ if lookPath "ibus-daemon" }}
+[".config/ibus/rime"]
+    type = "archive"  # use archive instead of git to manage default.custom.yaml file in it
+    url = "https://github.com/gaboolic/rime-frost/archive/refs/heads/master.zip"
+    format = "zip"
+    stripComponents = 1
+    refreshPeriod = "168h"
+{{- end }}

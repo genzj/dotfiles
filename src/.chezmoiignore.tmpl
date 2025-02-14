@@ -22,6 +22,7 @@
 Library/
 {{- end }}
 
-{{- if (ne .chezmoi.os "linux" ) }}
+{{ if (not (lookPath "ibus-daemon")) }}
+# ignore rime config if ibus isn't installed
 .config/ibus/rime
 {{- end }}
