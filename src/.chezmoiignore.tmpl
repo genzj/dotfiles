@@ -26,3 +26,8 @@ Library/
 # ignore rime config if ibus isn't installed
 .config/ibus/rime
 {{- end }}
+
+{{ if (not (lookPath "fcitx5")) }}
+# ignore rime config if fcitx5 isn't installed
+.local/share/fcitx5/rime
+{{- end }}
