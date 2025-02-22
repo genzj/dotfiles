@@ -27,6 +27,7 @@
 {{- end }}
 {{- if (and (eq .chezmoi.os "linux") (not .attribute.is_cloud_desktop) ) }}
 [credential "https://github.com"]
+    helper = cache
     helper = github
 {{- end }}
 [credential "https://git-codecommit.us-west-2.amazonaws.com"]
