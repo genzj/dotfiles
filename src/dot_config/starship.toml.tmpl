@@ -3,6 +3,8 @@
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
+command_timeout = 1000
+
 format = """
 [](#9A348E)\
 $os\
@@ -41,7 +43,18 @@ disabled = false
 # represents the current operating system
 [os]
 style = "bg:#9A348E"
-disabled = true # Disabled by default
+disabled = false
+
+
+{{ if .font.use_nf -}}
+[os.symbols]
+Amazon = " "
+Arch = " "
+Debian = " "
+Linux = " "
+Macos = " "
+Ubuntu = " "
+{{ end -}}
 
 [directory]
 style = "bg:#DA627D"
