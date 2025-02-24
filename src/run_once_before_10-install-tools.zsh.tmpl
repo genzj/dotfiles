@@ -15,8 +15,17 @@ mkdir -p "$HOME/.local/bin"
 }
 # )))
 
-# TODO: migrate to `mise use -g auqa:xxx` (sharkdp/fd, sharkdp/bat, BurntSushi/ripgrep and lsd-rs/lsd) or `ubi:xxx/yyy` (zoxide)
-# TODO: add lsd-rs/lsd
+{{ if .attribute.is_cloud_desktop -}}
+# override old versions provided by os
+mise use -g cmake tmux
+
+# install some tools from source because cloud desktop is using obsoleted GLIBC
+mise use -g cargo:usage-cli
+mise use -g asdf:richin13/asdf-neovim@ref:v0.10.4
+{{- end }}
+
+mise use -g bat fd lsd ripgrep zoxide
+
 # Install fd (((
 () {
     (( ${+commands[fd]} )) && return 0
