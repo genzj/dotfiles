@@ -38,17 +38,21 @@ to false, or following tools will be automatically installed
     - [starship](https://starship.rs/guide/#%F0%9F%9A%80-installation).
     - [Zim](https://zimfw.sh/docs/install/)
     - [zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
-1. Following tools will be automatically installed if they are not found in the PATH
+1. Following tools will be automatically installed if they are not found in the
+PATH. The installation will be conducted by mise first and fallback to shell
+script if mise exited with error
     - [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation)
     - [fd](https://github.com/sharkdp/fd?tab=readme-ov-file#installation)
     - [ripgrep](https://github.com/BurntSushi/ripgrep)
+    - lsd (no fallback)
+    - zoxide (no fallback, unless using ZIM)
 
 ## Post Update Configurations
 
 See `run_after_99-post-actions.zsh` for details.
 
 1. If you use Ubuntu and install Zsh with apt, the script will add the following line to
-    your ~/.zshenv file to stop `/etc/zsh/zshrc` from calling `compinit`
+    your `~/.zshenv` file to stop `/etc/zsh/zshrc` from calling `compinit`
     ([ref](https://github.com/zimfw/zimfw/wiki/Troubleshooting#completion-is-not-working)):
 
     ```sh
