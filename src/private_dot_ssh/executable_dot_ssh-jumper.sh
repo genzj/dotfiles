@@ -4,8 +4,12 @@ CISCO_ANY_CONNECT_TUN=utun6
 
 function is_home_net() {
     # local ssid=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | awk '/ SSID:/ { print $2 }')
-    local ssid=$(networksetup -getairportnetwork en0 | awk '/ Network:/ { print $4 }')
-    if [[ ! ($ssid =~ [Ss]kynet.*) ]] ; then
+    local ssid
+    ssid="$(networksetup -getairportnetwork en0 | awk '/ Network:/ { print $4 }')"
+    if nslookup -query=A  -timeout=2 pi.hole 192.168.1.101 &>/dev/null ; then
+        # local DNS can resolve pi.hole DNS name, indicating home wifi without VPN
+        true
+    elif [[ ! ($ssid =~ [Ss]kynet.*) ]] ; then
         # not using home wifi
         false
     elif ifconfig "$CISCO_ANY_CONNECT_TUN" >/dev/null 2>&1 ; then
