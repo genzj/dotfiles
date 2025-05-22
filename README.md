@@ -80,6 +80,8 @@ External repos:
 - [Tmux plugin manager](https://github.com/tmux-plugins/tpm)
 - [Oh-my-fish config](https://github.com/genzj/my-omf-config)
 - ZimAmznDev (only on working environments)
+- Raycast [script-commands](https://github.com/raycast/script-commands?tab=readme-ov-file#install-script-commands-from-this-repository)
+with enabled copies.
 
 ## Planned Configurations
 

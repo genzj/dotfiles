@@ -31,6 +31,13 @@
     format = "zip"
     stripComponents = 1
     refreshPeriod = "168h"
+
+["raycast-script-commands"]
+    type = "archive"  # use archive instead of git to manage _enabled-commands folder in it
+    url = "https://github.com/raycast/script-commands/archive/refs/heads/master.zip"
+    format = "zip"
+    stripComponents = 1
+    refreshPeriod = "168h"
 {{- end }}
 
 {{ if lookPath "ibus-daemon" }}
