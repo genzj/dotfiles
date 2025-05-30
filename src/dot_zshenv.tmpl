@@ -1,0 +1,8 @@
+. "$HOME/.cargo/env"
+fpath=("$HOME/.local/share/zim-my-config/env-setup/functions" $fpath)
+
+{{- if .attribute.is_amzn }}
+fpath=("$HOME/zim-amzn-dev/env-setup/functions" $fpath)
+autoload kcurl
+{{- end }}
+
