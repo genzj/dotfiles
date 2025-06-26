@@ -15,6 +15,28 @@
 }
 # )))
 
+# Android SDK setting (((
+() {
+    local android_sdk=""
+    local maybe_path=(
+        "$HOME/Library/Android/sdk"
+    )
+
+    for d in $maybe_path ; do
+        if [[ -d "$d" ]] ; then
+            android_sdk="$d"
+            break
+        fi
+    done
+
+    if [[ -n "$android_sdk" ]] ; then
+        export ANDROID_HOME="$HOME/Library/Android/sdk"
+        export PATH="$PATH:$ANDROID_HOME/emulator"
+        export PATH="$PATH:$ANDROID_HOME/platform-tools"
+    fi
+}
+# )))
+
 # Aliases (((
 () {
     alias s='sudo'
