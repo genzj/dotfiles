@@ -64,4 +64,12 @@ unsetopt EXTENDED_GLOB
 WORDCHARS='*?_~&;!#$%^<>'
 # )))
 
+# Editor setting (((
+() {
+    if (( $+commands[nvim] )) ; then
+        export EDITOR=nvim
+    fi
+}
+# )))
+
 # vim: set foldenable foldmethod=marker foldlevel=0 foldmarker=(((,))):
