@@ -42,6 +42,11 @@
     alias s='sudo'
     alias la='ls -a'
     alias lla='ls -a -l'
+
+    # Git (((
+    alias Gmff='git merge --ff-only'
+    alias Gw='git status'
+    # )))
 }
 # )))
 
