@@ -44,6 +44,7 @@
     alias lla='ls -a -l'
 
     # Git (((
+    alias Gl1='git log -1 --date-order --pretty=format:"${_git_log_fuller_format}"'
     alias Gmff='git merge --ff-only'
     alias Gw='git status'
     # )))
