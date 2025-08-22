@@ -30,6 +30,7 @@
     "locale",
     {
       "type": "weather",
+      "timeout": 1500,
       "outputFormat": "%t+-+%c+%C+(%l)&m"
     },
     "break",
