@@ -55,6 +55,12 @@
 () {
     try_adding_folder ~/.zsh/completion fpath
     try_adding_folder ~/.zfunc fpath
+
+    if [[ -d "$HOME/.zfunc" ]]; then
+        for f in "$HOME/.zfunc"/*; do
+            autoload -Uz "$(basename "$f")"
+        done
+    fi
 }
 # )))
 
