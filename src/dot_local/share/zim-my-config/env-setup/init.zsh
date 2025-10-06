@@ -65,6 +65,37 @@
 }
 # )))
 
+# Application-based function path setup (((
+# This section dynamically loads function files based on application availability:
+# 1. Looks for function directories in ./functions/
+# 2. For directories named with __, checks if path exists (e.g. usr__local -> /usr/local)
+# 3. For other directory names, checks if command exists (e.g. lsd -> $commands["lsd"])
+# 4. If conditions met, adds directory to fpath and autoloads functions
+() {
+    local funcs_dir="${${(%):-%x}:A:h}/functions"
+    [[ -d "$funcs_dir" ]] || return
+
+    for folder in "$funcs_dir"/*(/N); do
+        local folder_name="${folder:t}"
+        local should_load=false
+
+        if [[ "$folder_name" == *__* ]]; then
+            local check_path="${folder_name//__//}"
+            [[ -e "/$check_path" ]] && should_load=true
+        else
+            (( $+commands[$folder_name] )) && should_load=true
+        fi
+
+        if $should_load; then
+            fpath=("$folder" $fpath)
+            for func in "$folder"/*; do
+                autoload -Uz "${func:t}"
+            done
+        fi
+    done
+}
+# )))
+
 # Tmux plugin settings (((
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/tmux/README.md
 export ZSH_TMUX_DEFAULT_SESSION_NAME="default"
