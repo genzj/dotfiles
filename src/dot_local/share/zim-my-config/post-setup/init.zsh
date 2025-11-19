@@ -130,5 +130,53 @@ if (( ${+FZF_DEFAULT_COMMAND} )) export FZF_CTRL_T_COMMAND=${FZF_DEFAULT_COMMAND
 
 # )))
 
+
+
+# Patch zim Git aliases (((
+
+() {
+    local gprefix
+    zstyle -s ':zim:git' aliases-prefix 'gprefix' || gprefix=G
+
+    # Log (l)
+    alias ${gprefix}l1='git log -1 --date-order --pretty=format:"${_git_log_fuller_format}"'
+    alias ${gprefix}l1p='git log -1 --date-order --pretty=format:"${_git_log_fuller_format}" --patch'
+    alias ${gprefix}l1s='git log -1 --date-order --pretty=format:"${_git_log_fuller_format}" --stat'
+
+    # Merge (m)
+    alias ${gprefix}mff='git merge --ff-only'
+
+    # Main working tree (w)
+    alias ${gprefix}w='git status'
+
+    # Branch (b)
+    alias ${gprefix}bS='git show-branch --all --sha1-name'
+    alias ${gprefix}bU='git branch --set-upstream-to=refs/remotes/origin/HEAD'
+
+    # Overriding the G? alias to add my alias in search
+    local zim_my_config_module_home="${HOME}/.local/share/zim-my-config"
+    local git_alias_lookup_alias="${gprefix}?"
+    local original_definition=${aliases[$git_alias_lookup_alias]}
+    if [[ -z "$original_definition" ]]; then
+        echo "Warning: Alias '${git_alias_lookup_alias}' is not currently defined."
+        return 0
+    fi
+    unalias "$git_alias_lookup_alias" 2>/dev/null
+    # alias _git_alias_lookup_original="$original_definition"
+    eval "_git_alias_lookup_original_func() { $original_definition \"\$@\" }"
+    _git_alias_lookup_patched() {
+        local my_module_path="$1"
+        shift
+        _git_alias_lookup_original_func "$@"
+
+        echo "\n---------- Customized Aliases ----------\n"
+
+        # Execute the second function, funY
+        git-alias-lookup "$my_module_path" "$@"
+    }
+    alias "${git_alias_lookup_alias}"="_git_alias_lookup_patched \"${zim_my_config_module_home}\""
+}
+# )))
+
 # vim: set foldenable foldmethod=marker foldlevel=0 foldmarker=(((,))):
 
