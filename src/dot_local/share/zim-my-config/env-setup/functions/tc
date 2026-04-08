@@ -1,0 +1,6 @@
+if [[ -z $1 ]] || [[ ${1:0:1} == '-' ]]
+then
+    tmux new-session
+else
+    tmux new-session -s "$@"
+fi
