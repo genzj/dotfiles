@@ -31,7 +31,7 @@
     {
       "type": "weather",
       "timeout": 1500,
-      "outputFormat": "%t+-+%c+%C+(%l)&m"
+      "outputFormat": "%t+Feel+Like+%f+-+%c+%C+-+Preci+%p+%o+-+(%l)+%D+%S+%z+%s+%d+%m&m"
     },
     "break",
     "colors"
