@@ -2466,6 +2466,9 @@ map kitty_mod+p>shift+c kitten hints --type word --program @
 #::      # Run a command at a shell prompt (like typing the command and pressing Enter)
 #::      map ctrl+alt+a send_text normal,application some command with arguments\r
 
+# override terminal info; helpful when using kitty to ssh on servers without kitty terminfo
+map kitty_mod+p>t send_text normal,application export TERM=xterm-color\r
+
 #: Open kitty Website
 
 # map shift+cmd+/ open_url https://sw.kovidgoyal.net/kitty/
