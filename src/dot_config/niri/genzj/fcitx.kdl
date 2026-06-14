@@ -1,0 +1,6 @@
+environment {
+    QT_QPA_PLATFORM "wayland"
+    GTK_IM_MODULE "fcitx"
+    QT_IM_MODULE "fcitx"
+    XMODIFIERS "@im=fcitx"
+}

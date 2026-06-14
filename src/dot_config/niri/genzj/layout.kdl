@@ -1,0 +1,12 @@
+// Make the tab indicator wider and match the window height,
+// also put it at the top and within the column.
+layout {
+    tab-indicator {
+        width 4
+        gap 8
+        gaps-between-tabs 4
+        place-within-column
+        length total-proportion=0.3
+        hide-when-single-tab false
+    }
+}

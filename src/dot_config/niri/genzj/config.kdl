@@ -1,0 +1,4 @@
+include "binds.kdl"
+include "fcitx.kdl"
+include "layout.kdl"
+include "windowrules.kdl"

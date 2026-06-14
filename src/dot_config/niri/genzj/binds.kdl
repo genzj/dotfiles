@@ -1,0 +1,7 @@
+binds {
+    Mod+Shift+Slash hotkey-overlay-title="Show Cheatsheet" {
+        spawn "dms" "ipc" "call" "keybinds" "toggle" "niri";
+    }
+
+    Mod+B hotkey-overlay-title="Open Browser" { spawn "google-chrome-stable"; }
+}
