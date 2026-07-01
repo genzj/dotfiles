@@ -2,3 +2,16 @@ window-rule {
     match app-id="^org.telegram.desktop$"
     open-floating true
 }
+
+window-rule {
+    // Chrome PiP video window (it doesn't have an app-id)
+    match title="Picture in picture" app-id="^$"
+
+    // Force floating mode
+    open-floating true
+    default-floating-position x=15 y=32 relative-to="bottom-right"
+
+    // Set initial size (16:9 ratio for 420px width is 236.25px)
+    default-column-width { fixed 420; }
+    default-window-height { fixed 236; }
+}
