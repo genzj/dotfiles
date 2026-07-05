@@ -1,4 +1,4 @@
-. "$HOME/.cargo/env"
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 fpath=("$HOME/.local/share/zim-my-config/env-setup/functions" $fpath)
 
 {{- if .attribute.is_amzn }}
