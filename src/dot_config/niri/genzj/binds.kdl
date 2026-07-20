@@ -4,4 +4,5 @@ binds {
     }
 
     Mod+B hotkey-overlay-title="Open Browser" { spawn "google-chrome-stable"; }
+    Mod+E hotkey-overlay-title="Open Files" { spawn "nautilus"; }
 }
