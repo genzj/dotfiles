@@ -5,4 +5,11 @@ binds {
 
     Mod+B hotkey-overlay-title="Open Browser" { spawn "google-chrome-stable"; }
     Mod+E hotkey-overlay-title="Open Files" { spawn "nautilus"; }
+
+    Ctrl+Alt+Shift+Equal hotkey-overlay-title="Brightness Up" {
+       spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+    }
+    Ctrl+Alt+Shift+Minus hotkey-overlay-title="Brightness Down" {
+       spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+    }
 }
