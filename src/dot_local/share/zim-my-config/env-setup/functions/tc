@@ -1,6 +1,21 @@
 if [[ -z $1 ]] || [[ ${1:0:1} == '-' ]]
 then
     tmux new-session
+elif tmux has-session -t="$1" 2>/dev/null
+then
+    local answer
+    read "answer?Session '$1' already exists. Attach to it? [y/N] "
+    if [[ ${answer:l} == (y|yes) ]]
+    then
+        if [[ -n $TMUX ]]
+        then
+            tmux switch-client -t "$1"
+        else
+            tmux attach-session -t "$1"
+        fi
+    else
+        return 1
+    fi
 else
     tmux new-session -s "$@"
 fi
