@@ -1,6 +1,7 @@
-# Created once by chezmoi (`create_` prefix) and never rewritten afterwards, so blocks
-# appended by installers (Kiro CLI, AIM CLI, kiro-cmux, ...) can live here without
-# blocking `chezmoi apply`.
+# Created once by chezmoi (`create_` prefix) and never rewritten afterwards, so lines
+# appended later by installers and setup scripts survive and do not block `chezmoi apply`.
+# Keep no keywords here: a tool that greps this file for its own marker would match a
+# comment and skip its real work.
 #
 # The real configuration is in ~/.config/zsh/, which chezmoi does manage. Put anything
 # you want version-controlled there, not here.

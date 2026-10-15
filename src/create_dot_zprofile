@@ -1,6 +1,7 @@
-# Created once by chezmoi (`create_` prefix) and never rewritten afterwards, so blocks
-# appended by installers (Kiro CLI, ...) and machine-specific paths can live here
-# without blocking `chezmoi apply`.
+# Created once by chezmoi (`create_` prefix) and never rewritten afterwards, so lines
+# appended later by installers and setup scripts survive and do not block `chezmoi apply`.
+# Keep no keywords here: a tool that greps this file for its own marker would match a
+# comment and skip its real work. Machine-specific paths belong here too.
 #
 # The real configuration is in ~/.config/zsh/zprofile.zsh, which chezmoi does manage.
 

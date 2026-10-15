@@ -34,7 +34,8 @@ fi
     (( ${+commands[apt]} )) || return 0
     [[ -f /etc/zsh/zshrc ]] || return 0
     grep -q 'skip_global_compinit' /etc/zsh/zshrc 2>/dev/null || return 0
-    grep -q 'skip_global_compinit' ~/.zshenv 2>/dev/null && return 0
+    # anchored, so a mere mention in a comment cannot make this look done
+    grep -q '^skip_global_compinit' ~/.zshenv 2>/dev/null && return 0
     echo 'skip_global_compinit=1' >>! ~/.zshenv
 }
 #)))
