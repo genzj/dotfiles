@@ -24,9 +24,11 @@ if [[ -o interactive && -t 0 && -z ${ZIM_FULL} ]]; then
     typeset -g ZSHRC_MINIMAL=1
     PS1='%~ %# '
     export PATH="$HOME/.bin:$PATH"
-    export LC_ALL=en_US.UTF-8
-    export LANG=en_US.UTF-8
-    export LANGUAGE=en_US.UTF-8
+    # Only fall back to en_US if nothing already set a locale -- the OS or the
+    # desktop manager normally does, and theirs should win.
+    export LANG="${LANG:-en_US.UTF-8}"
+    export LANGUAGE="${LANGUAGE:-$LANG}"
+    export LC_ALL="${LC_ALL:-$LANG}"
     if [[ -r "$HOME/.zshrc.host" ]] ; then
         source "$HOME/.zshrc.host"
     fi
