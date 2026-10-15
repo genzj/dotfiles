@@ -1,0 +1,7 @@
+# Created once by chezmoi (`create_` prefix) and never rewritten afterwards, so blocks
+# appended by installers (AIM CLI, the skip_global_compinit line added by
+# run_after_99-post-actions.zsh, ...) can live here without blocking `chezmoi apply`.
+#
+# The real configuration is in ~/.config/zsh/zshenv.zsh, which chezmoi does manage.
+
+[[ -r "${HOME}/.config/zsh/zshenv.zsh" ]] && source "${HOME}/.config/zsh/zshenv.zsh"

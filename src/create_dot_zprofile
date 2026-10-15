@@ -1,0 +1,7 @@
+# Created once by chezmoi (`create_` prefix) and never rewritten afterwards, so blocks
+# appended by installers (Kiro CLI, ...) and machine-specific paths can live here
+# without blocking `chezmoi apply`.
+#
+# The real configuration is in ~/.config/zsh/zprofile.zsh, which chezmoi does manage.
+
+[[ -r "${HOME}/.config/zsh/zprofile.zsh" ]] && source "${HOME}/.config/zsh/zprofile.zsh"

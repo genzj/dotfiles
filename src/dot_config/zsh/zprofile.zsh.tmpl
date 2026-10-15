@@ -1,0 +1,17 @@
+# Login-shell configuration, sourced from ~/.zprofile.
+#
+# Machine-specific additions (and blocks appended by installers) stay in
+# ~/.zprofile itself, which chezmoi creates once and never rewrites.
+
+{{- if eq .chezmoi.os "darwin" }}
+# Homebrew
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Visual Studio Code (`code`)
+[[ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ]] && \
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+{{- end }}
+
+# Mise shims
+[[ -d "$HOME/.local/share/mise/shims" ]] && \
+    export PATH="$HOME/.local/share/mise/shims:$PATH"
