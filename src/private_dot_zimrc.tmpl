@@ -37,10 +37,6 @@ zmodule antoineco/zim-zoxide
 zmodule $HOME/zim-amzn-dev/env-setup
 {{ end -}}
 
-# initiate mise after all PATH manipulating plugins to give mise paths the
-# highest priority
-zmodule joke/zim-mise
-
 #
 # Prompt
 #
@@ -69,6 +65,12 @@ zmodule completion
 #
 # Modules that must be initialized last
 #
+
+# initiate mise after all PATH manipulating plugins to give mise paths the
+# highest priority; must be initialized after completion, or mise will call
+# compinit by itself and lead to "warning: completion was already
+# initialized before completion module."
+zmodule joke/zim-mise
 
 # Fish-like syntax highlighting for Zsh.
 # zsh-users/zsh-syntax-highlighting must be sourced after completion
