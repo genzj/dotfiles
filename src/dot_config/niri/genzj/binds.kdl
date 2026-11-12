@@ -12,4 +12,8 @@ binds {
     Ctrl+Alt+Shift+Minus hotkey-overlay-title="Brightness Down" {
        spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
     }
+
+    // https://github.com/hthienloc/dms-quick-capture
+    // install by `dms plugins install quickCapture`
+    Mod+F1 { spawn "dms" "ipc" "call" "quickCapture" "screenshot" "region" "edit"; }
 }
